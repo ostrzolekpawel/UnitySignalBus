@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace OsirisGames.EventBroker
+namespace OsirisGames.Signals
 {
-    public interface IEventBus
+    public interface ISignalBus
     {
         void Subscribe<T>(Action<T> action);
         void Fire<T>(T signal);

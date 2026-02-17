@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 
-namespace OsirisGames.EventBroker
+namespace OsirisGames.Signals
 {
-    public class EventBusAsync : IEventBusAsync
+    public class SignalBusAsync : ISignalBusAsync
     {
         private readonly Dictionary<Type, List<Delegate>> _subscriptions = new Dictionary<Type, List<Delegate>>();
 

@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using OsirisGames.EventBroker;
+using OsirisGames.Signals;
 using System;
 
 public class EventBrokerUnsubscribeTests
@@ -8,7 +8,7 @@ public class EventBrokerUnsubscribeTests
     public void Unsubscribe_RemovesCorrectSubscription()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         bool eventFired = false;
         Action<string> action = (message) => eventFired = true;
 
@@ -27,7 +27,7 @@ public class EventBrokerUnsubscribeTests
     public void Unsubscribe_WithNull_ThrowsException()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => eventBus.Unsubscribe<string>(null));
@@ -37,7 +37,7 @@ public class EventBrokerUnsubscribeTests
     public void Unsubscribe_ForNonExistentSubscription_DoesNot_CauseUnexpectedBehavior()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         Action<string> action = (message) => { };
 
         // Act && Assert
@@ -49,7 +49,7 @@ public class EventBrokerUnsubscribeTests
     public void Unsubscribe_RemovesOneInstance_Of_IdenticalAction()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         int eventCount = 0;
         Action<int> action = (number) => eventCount++;
 

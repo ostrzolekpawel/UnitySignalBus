@@ -3,9 +3,9 @@ using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
 
-namespace OsirisGames.EventBroker
+namespace OsirisGames.Signals
 {
-    public interface IEventBusAsync
+    public interface ISignalBusAsync
     {
         void Subscribe<T>(Func<T, UniTask> action);
         UniTask FireAsync<T>(T signal, CancellationToken token = default);

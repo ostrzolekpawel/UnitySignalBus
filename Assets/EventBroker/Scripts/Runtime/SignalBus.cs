@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace OsirisGames.EventBroker
+namespace OsirisGames.Signals
 {
-    public class EventBus : IEventBus
+    public class SignalBus : ISignalBus
     {
         private readonly Dictionary<Type, List<Delegate>> _subscriptions = new Dictionary<Type, List<Delegate>>();
 

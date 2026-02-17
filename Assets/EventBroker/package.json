@@ -1,8 +1,8 @@
 {
-  "name": "com.osirisgames.eventbroker",
-  "displayName": "Event Broker",
+  "name": "com.osirisgames.signalbus",
+  "displayName": "Signal Bus",
   "author": { "name": "Osiris" },
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Simple custom implementation of signal bus",
   "keywords": [],
   "category": "Tools",

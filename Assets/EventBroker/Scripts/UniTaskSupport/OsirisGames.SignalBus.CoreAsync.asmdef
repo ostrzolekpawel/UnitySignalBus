@@ -1,5 +1,5 @@
 {
-    "name": "OsirisGames.EventBroker.CoreAsync",
+    "name": "OsirisGames.SignalBus.CoreAsync",
     "rootNamespace": "",
     "references": [
         "UniTask"

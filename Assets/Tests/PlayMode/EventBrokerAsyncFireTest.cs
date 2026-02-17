@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using NUnit.Framework;
-using OsirisGames.EventBroker;
+using OsirisGames.Signals;
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -12,38 +12,38 @@ public class EventBrokerAsyncFireTest
     [UnityTest]
     public IEnumerator Fire_DoesNotInvokeUnrelatedSubscriptions() => UniTask.ToCoroutine(async () =>
     {
-            // Arrange
-            var eventBus = new EventBusAsync();
-            bool eventFired = false;
-            Func<string, UniTask> action = (message) =>
-            {
-                eventFired = true;
-                return UniTask.FromResult(message);
-            };
+        // Arrange
+        var eventBus = new SignalBusAsync();
+        bool eventFired = false;
+        Func<string, UniTask> action = (message) =>
+        {
+            eventFired = true;
+            return UniTask.FromResult(message);
+        };
 
-            eventBus.Subscribe<int>((value) => UniTask.CompletedTask);
+        eventBus.Subscribe<int>((value) => UniTask.CompletedTask);
 
-            // Act
-            eventBus.Subscribe(action);
-            await eventBus.FireAsync("Test Event");
+        // Act
+        eventBus.Subscribe(action);
+        await eventBus.FireAsync("Test Event");
 
-            // Assert
-            Assert.IsTrue(eventFired);
+        // Assert
+        Assert.IsTrue(eventFired);
     });
 
     [UnityTest]
     public IEnumerator Fire_InvokesAllSubscribedActions_For_SpecificEventType() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
         int counter = 0;
         Func<int, UniTask> action1 = (num) =>
         {
             counter += num;
             return UniTask.FromResult(counter);
         };
-        Func<int, UniTask> action2 = (num) => 
-        { 
+        Func<int, UniTask> action2 = (num) =>
+        {
             counter += num * 2;
             return UniTask.FromResult(counter);
         };
@@ -61,7 +61,7 @@ public class EventBrokerAsyncFireTest
     public IEnumerator Fire_MultipleSubscriptions_ForSameEventType_Is_HandledCorrectly() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
         int eventCount = 0;
         Func<int, UniTask> action = (number) =>
         {
@@ -82,7 +82,7 @@ public class EventBrokerAsyncFireTest
     public void Fire_DoesNothing_If_NoSubscriptionsExist()
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
 
         // Act && Assert
         Assert.DoesNotThrow(() => eventBus.FireAsync("Test Event").Forget());
@@ -91,28 +91,28 @@ public class EventBrokerAsyncFireTest
     [UnityTest]
     public IEnumerator Fire_WithNull_DoesNotCause_UnexpectedBehavior() => UniTask.ToCoroutine(async () =>
     {
-            // Arrange
-            var eventBus = new EventBusAsync();
-            bool eventFired = false;
-            Func<string, UniTask> action = (message) =>
-            {
-                eventFired = true;
-                return UniTask.FromResult(message);
-            };
+        // Arrange
+        var eventBus = new SignalBusAsync();
+        bool eventFired = false;
+        Func<string, UniTask> action = (message) =>
+        {
+            eventFired = true;
+            return UniTask.FromResult(message);
+        };
 
-            // Act
-            eventBus.Subscribe(action);
-            await eventBus.FireAsync<string>(null);
+        // Act
+        eventBus.Subscribe(action);
+        await eventBus.FireAsync<string>(null);
 
-            // Assert
-            Assert.IsTrue(eventFired);
+        // Assert
+        Assert.IsTrue(eventFired);
     });
 
     [UnityTest]
     public IEnumerator Fire_WillFinish_AfterLongestAction() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
 
         Func<string, UniTask> action1 = async (message) =>
         {
@@ -140,7 +140,7 @@ public class EventBrokerAsyncFireTest
     public IEnumerator Fire_WillFinish_AfterLongestAction2() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
 
         Func<string, UniTask> action1 = async (message) =>
         {

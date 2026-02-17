@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using OsirisGames.EventBroker;
+using OsirisGames.Signals;
 using System;
 
 public class EventBrokerFireTest
@@ -8,7 +8,7 @@ public class EventBrokerFireTest
     public void Fire_DoesNotInvokeUnrelatedSubscriptions()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         bool eventFired = false;
         Action<string> action = (message) => eventFired = true;
 
@@ -26,7 +26,7 @@ public class EventBrokerFireTest
     public void Fire_InvokesAllSubscribedActions_For_SpecificEventType()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         int counter = 0;
         Action<int> action1 = (num) => counter += num;
         Action<int> action2 = (num) => counter += num * 2;
@@ -44,7 +44,7 @@ public class EventBrokerFireTest
     public void Fire_MultipleSubscriptions_ForSameEventType_Is_HandledCorrectly()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         int eventCount = 0;
         Action<int> action = (number) => eventCount += number;
 
@@ -61,7 +61,7 @@ public class EventBrokerFireTest
     public void Fire_DoesNothing_If_NoSubscriptionsExist()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
 
         // Act && Assert
         Assert.DoesNotThrow(() => eventBus.Fire("Test Event"));
@@ -71,7 +71,7 @@ public class EventBrokerFireTest
     public void Fire_WithNull_DoesNotCause_UnexpectedBehavior()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         bool eventFired = false;
         Action<string> action = (message) => eventFired = true;
 

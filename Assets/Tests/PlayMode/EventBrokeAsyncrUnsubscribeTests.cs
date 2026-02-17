@@ -1,6 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using NUnit.Framework;
-using OsirisGames.EventBroker;
+using OsirisGames.Signals;
 using System;
 using System.Collections;
 using UnityEngine.TestTools;
@@ -11,7 +11,7 @@ public class EventBrokeAsyncrUnsubscribeTests
     public IEnumerator Unsubscribe_RemovesCorrectSubscription() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
         bool eventFired = false;
         Func<string, UniTask> action = (message) =>
         {
@@ -34,7 +34,7 @@ public class EventBrokeAsyncrUnsubscribeTests
     public void Unsubscribe_WithNull_ThrowsException()
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
 
         // Act & Assert
         Assert.Throws<ArgumentNullException>(() => eventBus.Unsubscribe<string>(null));
@@ -44,7 +44,7 @@ public class EventBrokeAsyncrUnsubscribeTests
     public void Unsubscribe_ForNonExistentSubscription_DoesNot_CauseUnexpectedBehavior()
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
         Func<string, UniTask> action = (message) => UniTask.CompletedTask;
 
         // Act && Assert
@@ -56,7 +56,7 @@ public class EventBrokeAsyncrUnsubscribeTests
     public IEnumerator Unsubscribe_RemovesOneInstance_Of_IdenticalAction() => UniTask.ToCoroutine(async () =>
     {
         // Arrange
-        var eventBus = new EventBusAsync();
+        var eventBus = new SignalBusAsync();
         int eventCount = 0;
         Func<int, UniTask> action = (number) =>
         {

@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using OsirisGames.EventBroker;
+using OsirisGames.Signals;
 using System;
 
 public class EventBrokerSubscribeTests
@@ -8,7 +8,7 @@ public class EventBrokerSubscribeTests
     public void Subscribe_AddsNewSubscription_For_EventType()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         bool eventFired = false;
         Action<string> action = (message) => eventFired = true;
 
@@ -24,7 +24,7 @@ public class EventBrokerSubscribeTests
     public void Subscribe_WithNull_ThrowsException()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
 
         // Act && Assert
         Assert.Throws<ArgumentNullException>(() => eventBus.Subscribe<string>(null));
@@ -34,7 +34,7 @@ public class EventBrokerSubscribeTests
     public void Subscribe_SameActionMultipleTimes_ResultsIn_MultipleInvocations()
     {
         // Arrange
-        var eventBus = new EventBus();
+        var eventBus = new SignalBus();
         int invocationCount = 0;
         Action<string> action = (message) => invocationCount++;
 
