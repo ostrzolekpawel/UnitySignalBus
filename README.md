@@ -1,4 +1,4 @@
-# Unity Event Broker
+# Unity Signal Bus
 
 ## Installation
 
