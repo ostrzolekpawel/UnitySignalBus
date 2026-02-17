@@ -8,7 +8,7 @@ There is several options to install this package:
 
 ### Unity Package Manager
 
-Open Unity Package Manager and go to **Add package from git URL...** and paste [https://github.com/ostrzolekpawel/UnityEventBroker.git?path=Assets/EventBroker](https://github.com/ostrzolekpawel/UnityEventBroker.git?path=Assets/EventBroker)
+Open Unity Package Manager and go to **Add package from git URL...** and paste [https://github.com/ostrzolekpawel/UnitySignalBus.git?path=Assets/SignalBus](https://github.com/ostrzolekpawel/UnitySignalBus.git?path=Assets/SignalBus)
 
 ### Manifest
 Add link to package from repository directly to manifest.json
@@ -19,7 +19,7 @@ Add link to package from repository directly to manifest.json
     "dependencies": {
         // other packages
         // ...
-        "com.osirisgames.eventbroker": "https://github.com/ostrzolekpawel/UnityEventBroker.git?path=Assets/EventBroker"
+        "com.osirisgames.eventbroker": "https://github.com/ostrzolekpawel/UnitySignalBus.git?path=Assets/SignalBus"
     }
 }
 ```
