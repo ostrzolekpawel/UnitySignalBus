@@ -19,7 +19,7 @@ Add link to package from repository directly to manifest.json
     "dependencies": {
         // other packages
         // ...
-        "com.osirisgames.eventbroker": "https://github.com/ostrzolekpawel/UnitySignalBus.git?path=Assets/SignalBus"
+        "com.osirisgames.signalbus": "https://github.com/ostrzolekpawel/UnitySignalBus.git?path=Assets/SignalBus"
     }
 }
 ```
